@@ -8,7 +8,7 @@ form.addEventListener('submit', function(e) {
   if (message !== '') {
     const li = document.createElement('li');
     li.textContent = message;
-    list.appendChild(li);
+    list.prepend(li);
     input.value = '';
   }
 });
