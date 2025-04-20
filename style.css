@@ -5,6 +5,7 @@
   text-shadow: 2px 2px 8px #6c8f3c;
   margin-bottom: 20px;
   animation: float 3s ease-in-out infinite;
+  text-align: center;
 }
 
 @keyframes float {
