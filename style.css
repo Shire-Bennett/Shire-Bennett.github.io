@@ -7,6 +7,13 @@
   animation: float 3s ease-in-out infinite;
   text-align: center;
 }
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #e8f0fe;
+  color: #333;
+  margin-top: 100px;
+}
 
 @keyframes float {
   0% { transform: translateY(0); }
