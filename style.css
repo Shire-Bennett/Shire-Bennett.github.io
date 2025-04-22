@@ -73,6 +73,59 @@ button:hover {
   border-radius: 10px;
   list-style: none;
 }
+body {
+  font-family: 'Cinzel Decorative', cursive;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.main-content {
+  flex: 2;
+}
+
+.discussion-panel {
+  flex: 1;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 300px;
+  height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#messageList {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.message {
+  background: #efefef;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+#messageForm input {
+  width: calc(100% - 60px);
+  padding: 5px;
+}
+
+#messageForm button {
+  padding: 5px 10px;
+  margin-left: 5px;
+}
+
 
 
 
