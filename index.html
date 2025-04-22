@@ -10,13 +10,36 @@
   <h1 class="title">🐀 The Shire Rats 🐀</h1>
   <p>Home of the most jacked esports team in history</p>
   <h2>Discussion:</h2>
-<form id="messageForm">
-  <input type="text" id="messageInput" placeholder="Type something..." required>
-  <button type="submit">Post</button>
-</form>
 
-<ul id="messageList"></ul>
-<script src="script.js"></script>
+  <form id="messageForm">
+    <input type="text" id="messageInput" placeholder="Type something..." required>
+    <button type="submit">Post</button>
+  </form>
 
+  <ul id="messageList"></ul>
+
+  <!-- Firebase SDKs via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js"></script>
+
+  <!-- Firebase config and initialization -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDkH9bD2OWaI08cJVsdRNVU_XavoUTwIUA",
+      authDomain: "shire-rats.firebaseapp.com",
+      projectId: "shire-rats",
+      storageBucket: "shire-rats.firebasestorage.app",
+      messagingSenderId: "541361661882",
+      appId: "1:541361661882:web:8876816bc3cb591eb99f83"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(); // You'll use this in your script.js
+  </script>
+
+  <!-- Your custom logic -->
+  <script src="script.js"></script>
 </body>
 </html>
