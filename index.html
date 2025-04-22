@@ -38,8 +38,58 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore(); // You'll use this in your script.js
   </script>
+<!-- Firebase App (the core Firebase SDK) -->
+<script type="module">
+  // Import the functions you need from the SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <!-- Your custom logic -->
-  <script src="script.js"></script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDkH9bD2OWaI08cJVsdRNVU_XavoUTwIUA",
+    authDomain: "shire-rats.firebaseapp.com",
+    projectId: "shire-rats",
+    storageBucket: "shire-rats.appspot.com",
+    messagingSenderId: "541361661882",
+    appId: "1:541361661882:web:8876816bc3cb591eb99f83"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Reference to the messages collection
+  const messagesRef = collection(db, "messages");
+
+  // Submit message
+  const form = document.getElementById("messageForm");
+  const input = document.getElementById("messageInput");
+  const list = document.getElementById("messageList");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (input.value.trim() !== "") {
+      await addDoc(messagesRef, {
+        text: input.value,
+        timestamp: Date.now()
+      });
+      input.value = "";
+    }
+  });
+
+  // Listen for new messages (sorted newest first)
+  const q = query(messagesRef, orderBy("timestamp", "desc"));
+  onSnapshot(q, (snapshot) => {
+    list.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const li = document.createElement("li");
+      li.textContent = doc.data().text;
+      li.className = "message";
+      list.appendChild(li);
+    });
+  });
+</script>
+
+  
 </body>
 </html>
