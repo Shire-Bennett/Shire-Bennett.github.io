@@ -1,14 +1,33 @@
-const form = document.getElementById('messageForm');
-const input = document.getElementById('messageInput');
-const list = document.getElementById('messageList');
+// Reference to Firestore
+const db = firebase.firestore();
 
-form.addEventListener('submit', function(e) {
+// DOM elements
+const messageForm = document.getElementById("messageForm");
+const messageInput = document.getElementById("messageInput");
+const messageList = document.getElementById("messageList");
+
+// Submit form
+messageForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const message = input.value.trim();
-  if (message !== '') {
-    const li = document.createElement('li');
-    li.textContent = message;
-    list.prepend(li);
-    input.value = '';
+  const text = messageInput.value.trim();
+  if (text) {
+    await db.collection("messages").add({
+      text,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    messageInput.value = "";
   }
 });
+
+// Real-time listener
+db.collection("messages")
+  .orderBy("timestamp", "desc") // newest first
+  .onSnapshot((snapshot) => {
+    messageList.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const li = document.createElement("li");
+      li.textContent = doc.data().text;
+      li.classList.add("message-box");
+      messageList.appendChild(li);
+    });
+  });
