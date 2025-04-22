@@ -1,33 +1,41 @@
-// Reference to Firestore
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDkH9bD2OWaI08cJVsdRNVU_XavoUTwIUA",
+  authDomain: "shire-rats.firebaseapp.com",
+  projectId: "shire-rats",
+  storageBucket: "shire-rats.appspot.com",
+  messagingSenderId: "541361661882",
+  appId: "1:541361661882:web:8876816bc3cb591eb99f83"
+};
+
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// DOM elements
-const messageForm = document.getElementById("messageForm");
-const messageInput = document.getElementById("messageInput");
-const messageList = document.getElementById("messageList");
+const form = document.getElementById("messageForm");
+const input = document.getElementById("messageInput");
+const list = document.getElementById("messageList");
 
-// Submit form
-messageForm.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const text = messageInput.value.trim();
-  if (text) {
+  const text = input.value.trim();
+  if (text !== "") {
     await db.collection("messages").add({
       text,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      timestamp: Date.now()
     });
-    messageInput.value = "";
+    input.value = "";
   }
 });
 
-// Real-time listener
+// Load and display messages (newest first)
 db.collection("messages")
-  .orderBy("timestamp", "desc") // newest first
+  .orderBy("timestamp", "desc")
   .onSnapshot((snapshot) => {
-    messageList.innerHTML = "";
+    list.innerHTML = "";
     snapshot.forEach((doc) => {
       const li = document.createElement("li");
       li.textContent = doc.data().text;
-      li.classList.add("message-box");
-      messageList.appendChild(li);
+      li.className = "message";
+      list.appendChild(li);
     });
   });
