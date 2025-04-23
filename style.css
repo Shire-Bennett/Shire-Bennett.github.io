@@ -1,12 +1,10 @@
 .title {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 64px;
-  color: #2d2d2d;
-  text-shadow: 2px 2px 8px #6c8f3c;
-  margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
   text-align: center;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 3em;
+  margin-top: 20px;
 }
+
 body {
   text-align: center;
   font-family: Arial, sans-serif;
