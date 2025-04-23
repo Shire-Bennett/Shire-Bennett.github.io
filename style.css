@@ -7,8 +7,11 @@
   animation: float 3s ease-in-out infinite;
   text-align: center;
 }
-
-
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
 body {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -17,11 +20,7 @@ body {
   margin-top: 100px;
 }
 
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
+
 form {
   margin: 20px 0;
 }
