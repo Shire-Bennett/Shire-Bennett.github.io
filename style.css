@@ -89,7 +89,7 @@ button:hover {
 
 .discussion-panel {
   flex: 1;
-  background-color: #fff;
+  background-color: #B1B1B1;
   border: 2px solid #ccc;
   padding: 15px;
   border-radius: 10px;
@@ -123,7 +123,7 @@ button:hover {
 }
 .our-story-box {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #B1B1B1;
   border-radius: 12px;
   padding: 30px 20px;
   margin: 30px auto;
