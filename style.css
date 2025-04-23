@@ -84,13 +84,6 @@ button:hover {
   border-radius: 10px;
   list-style: none;
 }
-body {
-  font-family: 'Cinzel Decorative', cursive;
-  background-color: #f8f8f8;
-  margin: 0;
-  padding: 20px;
-}
-
 .container {
   display: flex;
   gap: 40px;
