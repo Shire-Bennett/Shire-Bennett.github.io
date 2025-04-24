@@ -1,90 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head> 
-  <meta charset="UTF-8">
-  <title>Shire Rats Esports Club</title>
-   <link rel="icon" type="image/ico" href="Images/RatPic.ico">
- 
+<script type="module">
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy,
+    getDocs,
+    deleteDoc,
+    doc,
+    writeBatch
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <div class="main-content">
-      <h1 class="title">🐀 The Shire Rats 🐀</h1>
-      <p>Home of the most jacked esports team in history</p>
-     
-      <div class="our-story-box">
-  <h2>Our Story</h2>
-  <p>
-    Group of guys that love lifting and gaming. I am making this project for fun and to expose myself to the basics of web development.
-    The website serves as a homebase for my friends and I's gaming/friend group called "The Shire Rats". 
-    
-    
-  </p>
-</div>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDkH9bD2OWaI08cJVsdRNVU_XavoUTwIUA",
+    authDomain: "shire-rats.firebaseapp.com",
+    projectId: "shire-rats",
+    storageBucket: "shire-rats.appspot.com",
+    messagingSenderId: "541361661882",
+    appId: "1:541361661882:web:8876816bc3cb591eb99f83"
+  };
 
-    </div>
-     
-    <div class="discussion-panel">
-      <h2>Discussion</h2>
-      <form id="messageForm">
-        <input type="text" id="messageInput" placeholder="Type something..." required>
-        <button type="submit">Post</button>
-        
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const messagesRef = collection(db, "messages");
 
+  const form = document.getElementById("messageForm");
+  const input = document.getElementById("messageInput");
+  const list = document.getElementById("messageList");
 
-      </form>
-      <button id="clearMessagesBtn" type="button">Clear Messages</button>
-
-      <ul id="messageList"></ul>
-    </div>
-  </div>
-
-  <!-- Firebase (Module-based) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDkH9bD2OWaI08cJVsdRNVU_XavoUTwIUA",
-      authDomain: "shire-rats.firebaseapp.com",
-      projectId: "shire-rats",
-      storageBucket: "shire-rats.appspot.com",
-      messagingSenderId: "541361661882",
-      appId: "1:541361661882:web:8876816bc3cb591eb99f83"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const messagesRef = collection(db, "messages");
-
-    const form = document.getElementById("messageForm");
-    const input = document.getElementById("messageInput");
-    const list = document.getElementById("messageList");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (input.value.trim() !== "") {
-        await addDoc(messagesRef, {
-          text: input.value,
-          timestamp: Date.now()
-        });
-        input.value = "";
-      }
-    });
-
-    const q = query(messagesRef, orderBy("timestamp", "desc"));
-    onSnapshot(q, (snapshot) => {
-      list.innerHTML = "";
-      snapshot.forEach((doc) => {
-        const li = document.createElement("li");
-        li.textContent = doc.data().text;
-        li.className = "message";
-        list.appendChild(li);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (input.value.trim() !== "") {
+      await addDoc(messagesRef, {
+        text: input.value,
+        timestamp: Date.now()
       });
+      input.value = "";
+    }
+  });
+
+  const q = query(messagesRef, orderBy("timestamp", "desc"));
+  onSnapshot(q, (snapshot) => {
+    list.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const li = document.createElement("li");
+      li.textContent = doc.data().text;
+      li.className = "message";
+      list.appendChild(li);
     });
-  </script>
-</body>
-</html>
+  });
+
+  const clearBtn = document.getElementById("clearMessagesBtn");
+  clearBtn.addEventListener("click", async () => {
+    if (confirm("Are you sure you want to clear all messages?")) {
+      const snapshot = await getDocs(messagesRef);
+      const batch = writeBatch(db);
+
+      snapshot.forEach((docItem) => {
+        batch.delete(doc(db, "messages", docItem.id));
+      });
+
+      await batch.commit();
+      console.log("All messages cleared.");
+    }
+  });
+</script>
