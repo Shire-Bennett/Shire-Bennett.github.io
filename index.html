@@ -1,3 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <meta charset="UTF-8">
+  <title>Shire Rats Esports Club</title>
+  <link rel="icon" type="image/ico" href="images/RatPic.ico">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="main-content">
+      <h1 class="title">🐀 The Shire Rats 🐀</h1>
+      <p>Home of the most jacked esports team in history</p>
+      <div class="our-story-box">
+        <h2>Our Story</h2>
+        <p>
+          Group of guys that love lifting and gaming. I am making this project for fun...
+        </p>
+      </div>
+    </div>
+
+    <div class="discussion-panel">
+      <h2>Discussion</h2>
+      <form id="messageForm">
+        <input type="text" id="messageInput" placeholder="Type something..." required>
+        <button type="submit">Post</button>
+      </form>
+      <button id="clearMessagesBtn" type="button">Clear Messages</button>
+      <ul id="messageList"></ul>
+    </div>
+  </div>
+
 <script type="module">
   import {
     initializeApp
