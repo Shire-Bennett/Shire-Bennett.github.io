@@ -146,6 +146,20 @@ button:hover {
   color: #333;
   line-height: 1.5;
 }
+#clearMessagesBtn {
+  margin-top: 10px;
+  background-color: #b30000;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#clearMessagesBtn:hover {
+  background-color: #800000;
+}
 
 
 
