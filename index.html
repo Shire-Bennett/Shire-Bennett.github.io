@@ -133,7 +133,9 @@
     messageList.innerHTML = "";
     snapshot.forEach((doc) => {
       const li = document.createElement("li");
-      li.textContent = doc.data().text;
+      const messageText = doc.data().text;
+      const [username, messageContent] = messageText.split(": ", 2);
+      li.innerHTML = '<span class="username">${username}:</span> <span class="message-content">${messageContent}</span>';
       li.className = "message";
       messageList.appendChild(li);
     });
