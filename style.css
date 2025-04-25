@@ -61,8 +61,7 @@ button:hover {
   border: 2px solid #6c8f3c;
   border-radius: 12px;
   padding: 12px 16px;
-  margin: 10px auto;
-  width: 60%;
+  margin: 10px 0; /* Removed 'auto' to left-align */
   text-align: left;
   font-size: 14px;
   color: #444;
@@ -100,17 +99,20 @@ button:hover {
   border-radius: 8px;
 }
 
+#messageForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
 #messageForm input {
-  width: calc(100% - 60px);
+  flex: 1;
+  min-width: 0;
   padding: 5px;
 }
 
-#messageForm button {
-  margin-left: 5px;
-}
-
 #clearMessagesBtn {
-  margin-top: 10px;
   background-color: #b30000;
   color: white;
   border: none;
@@ -153,7 +155,7 @@ button:hover {
 .login-bar {
   position: absolute;
   top: 20px;
-  left: 20px; /* Moved to top-left */
+  left: 20px;
   z-index: 10;
 }
 
