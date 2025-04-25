@@ -7,21 +7,22 @@
   animation: float 3s ease-in-out infinite;
   text-align: center;
 }
+
 @keyframes float {
   0% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
   100% { transform: translateY(0); }
 }
+
 body {
   text-align: center;
   font-family: 'Cinzel Decorative', cursive;
   background-color: #7cba60;
   color: #333;
-  margin-top: 100px;
   margin: 0;
   padding: 20px;
+  padding-top: 60px; /* For login bar spacing */
 }
-
 
 form {
   margin: 20px 0;
@@ -33,9 +34,6 @@ input[type="text"] {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
-}
-.container {
-  display: none;
 }
 
 button {
@@ -53,6 +51,12 @@ button:hover {
   background-color: #55732f;
 }
 
+#messageList {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
 #messageList li {
   background-color: #f4f4f4;
   border: 2px solid #6c8f3c;
@@ -61,29 +65,17 @@ button:hover {
   margin: 10px auto;
   width: 60%;
   text-align: left;
-  font-size: 12px;
-  color: #333;
+  font-size: 14px; /* Later definition overrides 12px */
+  color: #444; /* Later definition overrides #333 */
   box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
 
-#messageList li {
-  margin: 10px 0;
-  font-size: 14px;
-  color: #444;
-}
-.message-box {
-  border: 1px solid #ccc;
-  background-color: #fdfdfd;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 10px;
-  list-style: none;
-}
 .container {
   display: flex;
   gap: 40px;
   align-items: flex-start;
   justify-content: center;
+  margin-top: 0;
 }
 
 .main-content {
@@ -102,12 +94,6 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#messageList {
-  list-style: none;
-  padding: 0;
-  margin-top: 15px;
-}
-
 .message {
   background: #efefef;
   padding: 10px;
@@ -124,6 +110,7 @@ button:hover {
   padding: 5px 10px;
   margin-left: 5px;
 }
+
 .our-story-box {
   font-family: Arial, sans-serif;
   background-color: #B1B1B1;
@@ -149,6 +136,7 @@ button:hover {
   color: #333;
   line-height: 1.5;
 }
+
 #clearMessagesBtn {
   margin-top: 10px;
   background-color: #b30000;
@@ -163,44 +151,25 @@ button:hover {
 #clearMessagesBtn:hover {
   background-color: #800000;
 }
-.auth-container {
+
+.login-bar {
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #f5f5f5;
-  padding: 10px 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  z-index: 9999;
-  width: 200px;
-  font-family: sans-serif;
+  z-index: 10;
 }
 
-.auth-container input {
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 5px;
+.login-bar button {
+  padding: 8px 16px;
   font-size: 14px;
-}
-
-.auth-container button {
-  width: 100%;
-  padding: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: #444;
+  background-color: #6c8f3c;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Cinzel Decorative', cursive;
 }
 
-.auth-container h2 {
-  font-size: 16px;
-  margin-bottom: 10px;
-  text-align: center;
+.login-bar button:hover {
+  background-color: #55732f;
 }
-
-
-
-
-
