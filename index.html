@@ -3,7 +3,7 @@
 <head> 
   <meta charset="UTF-8">
   <title>Shire Rats Esports Club</title>
-  <link rel="icon" type="image/ico" href="C:\Users\stefa\Documents\Shire-Bennett.github.io\images/RatPic.ico">
+  <link rel="icon" type="image/ico" href="Images/RatPic.ico">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
 </head>
@@ -14,6 +14,7 @@
       <input type="password" id="passwordInput" placeholder="Password" required>
       <button type="submit">Login / Sign Up</button>
     </form>
+    <button id="logoutBtn" style="display: none;">Logout</button>
   </div>
 
   <div class="container">
@@ -30,8 +31,10 @@
       <h2>Discussion</h2>
       <form id="messageForm">
         <input type="text" id="messageInput" placeholder="Type something..." required>
-        <button type="submit">Post</button>
-        <button id="clearMessagesBtn" type="button">Clear Messages</button>
+        <div class="button-group">
+          <button type="submit">Post</button>
+          <button id="clearMessagesBtn" type="button">Clear Messages</button>
+        </div>
       </form>
       <ul id="messageList"></ul>
     </div>
@@ -67,32 +70,76 @@
   const db = getFirestore(app);
   const messagesRef = collection(db, "messages");
 
-  const form = document.getElementById("messageForm");
-  const input = document.getElementById("messageInput");
-  const list = document.getElementById("messageList");
+  const loginForm = document.getElementById("loginForm");
+  const usernameInput = document.getElementById("usernameInput");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const messageForm = document.getElementById("messageForm");
+  const messageInput = document.getElementById("messageInput");
+  const messageList = document.getElementById("messageList");
 
-  form.addEventListener("submit", async (e) => {
+  // Check if a user is already "logged in" (username in localStorage)
+  function updateLoginState() {
+    const username = localStorage.getItem("username");
+    if (username) {
+      loginForm.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+    } else {
+      loginForm.style.display = "flex";
+      logoutBtn.style.display = "none";
+    }
+  }
+
+  // Initial check on page load
+  updateLoginState();
+
+  // Handle login form submission
+  loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (input.value.trim() !== "") {
-      await addDoc(messagesRef, {
-        text: input.value,
-        timestamp: Date.now()
-      });
-      input.value = "";
+    const username = usernameInput.value.trim();
+    if (username) {
+      localStorage.setItem("username", username);
+      usernameInput.value = "";
+      updateLoginState();
     }
   });
 
+  // Handle logout
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("username");
+    updateLoginState();
+  });
+
+  // Handle message form submission
+  messageForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const username = localStorage.getItem("username");
+    if (!username) {
+      alert("Please log in to post a message!");
+      return;
+    }
+    if (messageInput.value.trim() !== "") {
+      const messageText = `${username}: ${messageInput.value}`;
+      await addDoc(messagesRef, {
+        text: messageText,
+        timestamp: Date.now()
+      });
+      messageInput.value = "";
+    }
+  });
+
+  // Load messages from Firebase
   const q = query(messagesRef, orderBy("timestamp", "desc"));
   onSnapshot(q, (snapshot) => {
-    list.innerHTML = "";
+    messageList.innerHTML = "";
     snapshot.forEach((doc) => {
       const li = document.createElement("li");
       li.textContent = doc.data().text;
       li.className = "message";
-      list.appendChild(li);
+      messageList.appendChild(li);
     });
   });
 
+  // Clear messages
   const clearBtn = document.getElementById("clearMessagesBtn");
   clearBtn.addEventListener("click", async () => {
     if (confirm("Are you sure you want to clear all messages?")) {
