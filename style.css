@@ -101,19 +101,19 @@ button:hover {
 
 #messageForm {
   display: flex;
-  flex-direction: column; /* Stack input and buttons vertically */
+  flex-direction: column;
   gap: 8px;
 }
 
 #messageForm input {
-  width: 100%; /* Full width of the form */
+  width: 100%;
   padding: 5px;
 }
 
 #messageForm .button-group {
   display: flex;
   gap: 8px;
-  justify-content: flex-start; /* Align buttons to the left */
+  justify-content: flex-start;
 }
 
 #clearMessagesBtn {
@@ -190,4 +190,19 @@ button:hover {
 
 .login-bar button:hover {
   background-color: #55732f;
+}
+
+#logoutBtn {
+  padding: 5px 10px;
+  font-size: 12px;
+  background-color: #b30000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+#logoutBtn:hover {
+  background-color: #800000;
 }
