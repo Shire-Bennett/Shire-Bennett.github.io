@@ -127,7 +127,7 @@
     }
   });
 
-  // Load messages from Firebase
+  // Load messages from Firebase and style username
   const q = query(messagesRef, orderBy("timestamp", "desc"));
   onSnapshot(q, (snapshot) => {
     messageList.innerHTML = "";
@@ -135,7 +135,7 @@
       const li = document.createElement("li");
       const messageText = doc.data().text;
       const [username, messageContent] = messageText.split(": ", 2);
-      li.innerHTML = '<span class="username">${username}:</span> <span class="message-content">${messageContent}</span>';
+      li.innerHTML = `<span class="username">${username}:</span> <span class="message-content">${messageContent}</span>`;
       li.className = "message";
       messageList.appendChild(li);
     });
