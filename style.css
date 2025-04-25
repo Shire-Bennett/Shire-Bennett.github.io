@@ -206,3 +206,14 @@ button:hover {
 #logoutBtn:hover {
   background-color: #800000;
 }
+
+.username {
+  font-weight: bold;
+  font-family: 'Georgia', serif; /* Different font for username */
+  color: #2d2d2d; /* Slightly darker color for contrast */
+}
+
+.message-content {
+  font-family: 'Cinzel Decorative', cursive; /* Match the site's default font */
+  color: #444;
+}
