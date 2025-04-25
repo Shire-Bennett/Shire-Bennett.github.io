@@ -34,6 +34,9 @@ input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+.container {
+  display: none;
+}
 
 button {
   padding: 10px 16px;
